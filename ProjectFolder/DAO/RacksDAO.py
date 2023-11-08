@@ -1,4 +1,4 @@
-from dao import BaseDAO
+from DAO.dao import BaseDAO
 
 class RacksDAO(BaseDAO):
     def __init__(self, conn):

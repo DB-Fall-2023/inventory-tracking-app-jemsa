@@ -1,4 +1,4 @@
-from dao import BaseDAO
+from DAO.dao import BaseDAO
 
 class PartsDAO(BaseDAO):
     def __init__(self, conn):
@@ -19,7 +19,7 @@ class PartsDAO(BaseDAO):
         cur = self.execute_query(query, (part_id,))
         return cur.fetchone()
 
-    def get_part_by_id(self, part_id, part_name, part_type, part_price):
+    def update_part_by_id(self, part_id, part_name, part_type, part_price):
         query = "UPDATE Parts Set PartName = %s, PartType = %s, PartPrice = %s WHERE PartID = %s;"
         self.execute_query(query, (part_name, part_type, part_price, part_id,))
         self.commit()

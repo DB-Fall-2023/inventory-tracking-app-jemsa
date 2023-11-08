@@ -1,5 +1,5 @@
-from PartsDAO import PartsDAO
-from RacksDAO import RacksDAO 
+from .PartsDAO import PartsDAO
+from .RacksDAO import RacksDAO 
 
 
 class DAOFactory:
