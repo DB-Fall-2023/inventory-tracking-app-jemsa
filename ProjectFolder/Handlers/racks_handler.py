@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
 from DAO.dao_factory import DAOFactory
-from app import conn
+from config.connectHeroku import conn
 
 racks_handler = Blueprint('racks_handler', __name__)
 
