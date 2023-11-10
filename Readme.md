@@ -13,23 +13,24 @@ Joy A. Martínez Guadalupe - joy.martinez@upr.edu
 Edwin J. Vega Reyes - edwin.vega4@upr.edu
 
 Heroku Credentials:
+
 Host:
-  ec2-44-214-132-149.compute-1.amazonaws.com
+  ec2-34-202-53-101.compute-1.amazonaws.com
   
 Database:
-  dao09k51u783e5
+  d4b4cfrn0mrp8p
   
 User:
-  aubzwnpircvyvo
+  mzytobqvjwsson
   
 Port:
   5432
   
 Password:
-  ac0be2f0a0beccd6359cfc837765b3d6d8fb3b6c7bbffcda2aaaacac84e752bc
+  b2a8350a67754fe49c4c3ab554e3b13a5d258d587826c7ecab8a4169c064699c
   
 URI:
-  postgres://aubzwnpircvyvo:ac0be2f0a0beccd6359cfc837765b3d6d8fb3b6c7bbffcda2aaaacac84e752bc@ec2-44-214-132-149.compute-1.amazonaws.com:5432/dao09k51u783e5
+  postgres://mzytobqvjwsson:b2a8350a67754fe49c4c3ab554e3b13a5d258d587826c7ecab8a4169c064699c@ec2-34-202-53-101.compute-1.amazonaws.com:5432/d4b4cfrn0mrp8p
   
 Heroku CLI:
   heroku pg:psql postgresql-vertical-44021 --app postgres-sql
