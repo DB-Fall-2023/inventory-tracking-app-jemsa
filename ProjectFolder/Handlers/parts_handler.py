@@ -20,7 +20,7 @@ def create_part():
         part_id = PartsDAO.create_parts(part_name, part_type, part_price)
         response = {
             'message': 'Part created successfully',
-            'PartID': part_id
+            'PartID': part_id[0]
         }
         return jsonify(response), 201
 
@@ -40,10 +40,10 @@ def get_parts():
         response = []
         for part in parts:
             part_data = {
-                'part_id': part['PartID'],
-                'part_name': part['PartName'],
-                'part_type': part['PartType'],
-                'part_price' : part['PartPrice']
+                'part_id': part[0],
+                'part_name': part[1],
+                'part_type': part[2],
+                'part_price' : part[3]
             }
             response.append(part_data)
 
@@ -61,13 +61,17 @@ def get_part_by_id(part_id):
 
     try:
         part = PartsDAO.get_part_by_id(part_id)
-        response = {
-            'part_name': part['PartName'],
-            'part_type': part['PartType'],
-            'part_price' : part['PartPrice']
-        }
+        if part:
+            response = {
+                'part_name': part[1],
+                'part_type': part[2],
+                'part_price' : part[3]
+            }
 
-        return jsonify(response)
+            return jsonify(response)
+        else:
+            return jsonify(error='Part not found'), 404
+
 
     except Exception as e:
         error_message = str(e)
@@ -86,10 +90,7 @@ def update_part(part_id):
     try:
         PartsDAO.update_part_by_id(part_id, new_part_name, new_part_type, new_part_price)
         part = PartsDAO.get_part_by_id(part_id)
-        if part:
-            part['PartName'] = new_part_name
-            part['PartType'] = new_part_type
-            part['PartPrice'] = new_part_price
+        if part and (part[1] == new_part_name and part[2] == new_part_type and part[3] == new_part_price):
             return jsonify(message=f'Part {part_id} updated successfully')
 
         else:
@@ -109,7 +110,10 @@ def delete_part(part_id):
         part = PartsDAO.get_part_by_id(part_id)
         if part:
             PartsDAO.delete_part_by_id(part_id)
-            return jsonify(message=f'Part {part_id} deleted successfully')
+            if not PartsDAO.get_part_by_id(part_id):
+                return jsonify(message=f'Part {part_id} deleted successfully')
+            else:
+                return jsonify(error='Part could not be deleted'), 404
 
         else:
             return jsonify(error='Part not found'), 404
