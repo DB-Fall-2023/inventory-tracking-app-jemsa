@@ -29,6 +29,7 @@ def create_rack():
 
 @racks_handler.route('/', methods=['GET'])
 def get_rack():
+    
     dao_factory = DAOFactory(conn)
     RacksDAO = dao_factory.get_racks_dao()
 
@@ -38,10 +39,10 @@ def get_rack():
         response = []
         for rack in racks:
             rack_data = {
-                'rack_id': rack['RackID'],
-                'rack_capacity': rack['RackCapacity'],
-                'rack_quantity': rack['RackQuantity'],
-                'rack_warehouse_id' : rack['WarehouseID']
+                'rack_id': rack[0],
+                'rack_capacity': rack[1],
+                'rack_quantity': rack[2],
+                'rack_warehouse_id' : rack[3]
             }
             response.append(rack_data)
 

@@ -4,13 +4,14 @@ class RacksDAO(BaseDAO):
     def __init__(self, conn):
         super().__init__(conn)
 
+# first check if a warehouse with the given id exists
     def create_rack(self, rack_capacity, rack_quantity, rack_warehouse_id):
-        query = "INSERT INTO Racks (RackCapacity, RackQuantity, WarehouseID) VALUES (%f, %i, %i) RETURNING RackID;"
+        query = "INSERT INTO Racks (RackCapacity, RackQuantity, WarehouseID) VALUES (%s, %s, %s) RETURNING RackID;"
         self.execute_query(query, (rack_capacity, rack_quantity, rack_warehouse_id,))
         self.commit()
 
     def get_racks(self):
-        query = "SELECT * FROM Racks;"
+        query = 'SELECT * FROM "Racks"'
         cur = self.execute_query(query)
         return cur.fetchall()
     
