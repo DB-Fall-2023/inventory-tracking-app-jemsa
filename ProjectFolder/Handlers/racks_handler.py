@@ -60,13 +60,16 @@ def get_rack_by_id(rack_id):
     
     try:
         rack = RacksDAO.get_rack_by_id(rack_id)
-        response = {
-            'rack_capacity': rack[1],
-            'rack_quantity': rack[2],
-            'rack_warehouse_id' : rack[3]
-        }
+        if rack:
+            response = {
+                'rack_capacity': rack[1],
+                'rack_quantity': rack[2],
+                'rack_warehouse_id' : rack[3]
+            }
 
-        return jsonify(response)
+            return jsonify(response)
+        else:
+            return jsonify(error='Rack not found'), 404
 
     except Exception as e:
         error_message = str(e)
