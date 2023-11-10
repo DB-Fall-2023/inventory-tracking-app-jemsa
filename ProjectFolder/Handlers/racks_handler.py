@@ -18,7 +18,7 @@ def create_rack():
         rack_id = RacksDAO.create_rack(rack_capacity, rack_quantity, rack_warehouse_id)
         response = {
             'message': 'Rack created successfully',
-            'RackID': rack_id
+            'RackID': rack_id[0]
         }
         return jsonify(response), 201
 
@@ -61,9 +61,9 @@ def get_rack_by_id(rack_id):
     try:
         rack = RacksDAO.get_rack_by_id(rack_id)
         response = {
-            'rack_capacity': rack['RackCapacity'],
-            'rack_quantity': rack['RackQuantity'],
-            'rack_warehouse_id' : rack['WarehouseID']
+            'rack_capacity': rack[1],
+            'rack_quantity': rack[2],
+            'rack_warehouse_id' : rack[3]
         }
 
         return jsonify(response)
@@ -80,12 +80,16 @@ def get_rack_by_warehouse_id(warehouse_id):
     RacksDAO = dao_factory.get_racks_dao()
 
     try:
-        rack = RacksDAO.get_racks_by_warehouse_id(warehouse_id)
-        response = {
-            'rack_id': rack['RackID'],
-            'rack_capacity': rack['RackCapacity'],
-            'rack_quantity': rack['RackQuantity']
-        }
+        racks = RacksDAO.get_racks_by_warehouse_id(warehouse_id)
+        response = []
+        for rack in racks:
+            rack_data = {
+                'rack_id': rack[0],
+                'rack_capacity': rack[1],
+                'rack_quantity': rack[2],
+                'rack_warehouse_id' : rack[3]
+            }
+            response.append(rack_data)
 
         return jsonify(response)
 
@@ -105,11 +109,8 @@ def update_rack(rack_id):
 
     try:
         RacksDAO.update_rack_by_id(rack_id, new_rack_capacity, new_rack_quantity, new_rack_warehouse_id)
-        part = RacksDAO.get_rack_by_id(rack_id)
-        if part:
-            part['RackCapacity'] = new_rack_capacity
-            part['RackQuantity'] = new_rack_quantity
-            part['WarehouseID'] = new_rack_warehouse_id
+        rack = RacksDAO.get_rack_by_id(rack_id)
+        if rack and (rack[1] == new_rack_capacity and rack[2] == new_rack_quantity and rack[3] == new_rack_warehouse_id):
             return jsonify(message=f'Rack {rack_id} updated successfully')
 
         else:
@@ -130,7 +131,10 @@ def delete_rack(rack_id):
         rack = RacksDAO.get_rack_by_id(rack_id)
         if rack:
             RacksDAO.delete_rack_by_id(rack_id)
-            return jsonify(message=f'Rack {rack_id} deleted successfully')
+            if not RacksDAO.get_rack_by_id(rack_id):#If it doesnt exist, we deleted it
+                return jsonify(message=f'Rack {rack_id} deleted successfully')
+            else:
+                return jsonify(error='Rack could not be deleted'), 404
 
         else:
             return jsonify(error='Rack not found'), 404
