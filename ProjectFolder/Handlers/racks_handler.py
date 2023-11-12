@@ -142,7 +142,6 @@ def delete_rack(rack_id):
         else:
             return jsonify(error='Rack not found'), 404
 
-
     except Exception as e:
         error_message = str(e)
         return jsonify(error=error_message), 500

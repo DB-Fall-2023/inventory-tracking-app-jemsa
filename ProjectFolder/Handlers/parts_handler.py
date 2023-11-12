@@ -65,13 +65,12 @@ def get_part_by_id(part_id):
             response = {
                 'part_name': part[1],
                 'part_type': part[2],
-                'part_price' : part[3]
+                'part_price': part[3]
             }
 
             return jsonify(response)
         else:
             return jsonify(error='Part not found'), 404
-
 
     except Exception as e:
         error_message = str(e)
@@ -117,7 +116,6 @@ def delete_part(part_id):
 
         else:
             return jsonify(error='Part not found'), 404
-
 
     except Exception as e:
         error_message = str(e)
