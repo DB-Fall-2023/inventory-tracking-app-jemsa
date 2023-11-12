@@ -18,7 +18,7 @@ def create_users():
         user_id = user_dao.create_user(username, warehouse_id)
         response = {
             'message': 'User created successfully',
-            'WarehouseID': user_id[0]
+            'UserID': user_id[0]
         }
         return jsonify(response), 201
 
