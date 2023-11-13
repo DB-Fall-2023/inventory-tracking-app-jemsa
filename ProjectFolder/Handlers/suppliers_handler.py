@@ -19,7 +19,7 @@ def create_supplier():
         supplier_id = supplier_dao.create_suppliers(supplier_name, supplier_address, supplier_city)
         response = {
             'message': 'Supplier created successfully',
-            'WarehouseID': supplier_id[0]
+            'SupplierID': supplier_id[0]
         }
         return jsonify(response), 201
 
