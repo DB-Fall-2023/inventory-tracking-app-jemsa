@@ -5,7 +5,7 @@ from config.connectHeroku import conn
 most_global_statistics_handler = Blueprint('most_global_statistics_handler', __name__)
 
 
-@most_global_statistics_handler.route('/rack', methods=['GET'])
+@most_global_statistics_handler.route('/rack', methods=['POST'])
 def get_most_rack():
     dao_factory = DAOFactory(conn)
     stats = dao_factory.get_most_global_statistics_dao()
@@ -31,7 +31,7 @@ def get_most_rack():
         return jsonify(error=error_message), 500
 
 
-@most_global_statistics_handler.route('/incoming', methods=['GET'])
+@most_global_statistics_handler.route('/incoming', methods=['POST'])
 def get_most_incoming():
     dao_factory = DAOFactory(conn)
     stats = dao_factory.get_most_global_statistics_dao()
@@ -57,7 +57,7 @@ def get_most_incoming():
         return jsonify(error=error_message), 500
 
 
-@most_global_statistics_handler.route('/deliver', methods=['GET'])
+@most_global_statistics_handler.route('/deliver', methods=['POST'])
 def get_most_deliver():
     dao_factory = DAOFactory(conn)
     stats = dao_factory.get_most_global_statistics_dao()
@@ -83,7 +83,7 @@ def get_most_deliver():
         return jsonify(error=error_message), 500
 
 
-@most_global_statistics_handler.route('/transactions', methods=['GET'])
+@most_global_statistics_handler.route('/transactions', methods=['POST'])
 def get_most_transactions():
     dao_factory = DAOFactory(conn)
     stats = dao_factory.get_most_global_statistics_dao()
@@ -109,7 +109,7 @@ def get_most_transactions():
         return jsonify(error=error_message), 500
 
 
-@most_global_statistics_handler.route('/city', methods=['GET'])
+@most_global_statistics_handler.route('/city', methods=['POST'])
 def get_most_city():
     dao_factory = DAOFactory(conn)
     stats = dao_factory.get_most_global_statistics_dao()

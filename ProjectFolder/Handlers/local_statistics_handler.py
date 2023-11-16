@@ -5,7 +5,7 @@ from config.connectHeroku import conn
 local_statistics_handler = Blueprint('local_statistics_handler', __name__)
 
 
-@local_statistics_handler.route('/<int:warehouse_id>/profit', methods=['GET'])
+@local_statistics_handler.route('/<int:warehouse_id>/profit', methods=['POST'])
 def get_warehouse_profits(warehouse_id):
     dao_factory = DAOFactory(conn)
     stats = dao_factory.get_local_statistics_dao()
@@ -31,7 +31,7 @@ def get_warehouse_profits(warehouse_id):
         return jsonify(error=error_message), 500
 
 
-@local_statistics_handler.route('/<int:warehouse_id>/rack/lowstock', methods=['GET'])
+@local_statistics_handler.route('/<int:warehouse_id>/rack/lowstock', methods=['POST'])
 def get_rack_lowstock(warehouse_id):
     dao_factory = DAOFactory(conn)
     stats = dao_factory.get_local_statistics_dao()
@@ -56,7 +56,7 @@ def get_rack_lowstock(warehouse_id):
         return jsonify(error=error_message), 500
 
 
-@local_statistics_handler.route('/<int:warehouse_id>/rack/material', methods=['GET'])
+@local_statistics_handler.route('/<int:warehouse_id>/rack/material', methods=['POST'])
 def get_rack_material(warehouse_id):
     dao_factory = DAOFactory(conn)
     stats = dao_factory.get_local_statistics_dao()
@@ -81,7 +81,7 @@ def get_rack_material(warehouse_id):
         return jsonify(error=error_message), 500
 
 
-@local_statistics_handler.route('/<int:warehouse_id>/rack/expensive', methods=['GET'])
+@local_statistics_handler.route('/<int:warehouse_id>/rack/expensive', methods=['POST'])
 def get_rack_expensive(warehouse_id):
     dao_factory = DAOFactory(conn)
     stats = dao_factory.get_local_statistics_dao()
@@ -105,7 +105,7 @@ def get_rack_expensive(warehouse_id):
         return jsonify(error=error_message), 500
 
 
-@local_statistics_handler.route('/<int:warehouse_id>/transaction/suppliers', methods=['GET'])
+@local_statistics_handler.route('/<int:warehouse_id>/transaction/suppliers', methods=['POST'])
 def get_transaction_suppliers(warehouse_id):
     dao_factory = DAOFactory(conn)
     stats = dao_factory.get_local_statistics_dao()
@@ -129,7 +129,7 @@ def get_transaction_suppliers(warehouse_id):
         return jsonify(error=error_message), 500
 
 
-@local_statistics_handler.route('/<int:warehouse_id>/transaction/leastcost', methods=['GET'])
+@local_statistics_handler.route('/<int:warehouse_id>/transaction/leastcost', methods=['POST'])
 def get_transaction_leastcost(warehouse_id):
     dao_factory = DAOFactory(conn)
     stats = dao_factory.get_local_statistics_dao()
@@ -154,7 +154,7 @@ def get_transaction_leastcost(warehouse_id):
         return jsonify(error=error_message), 500
 
 
-@local_statistics_handler.route('/<int:warehouse_id>/users/receivesmost', methods=['GET'])
+@local_statistics_handler.route('/<int:warehouse_id>/users/receivesmost', methods=['POST'])
 def get_users_receivesmost(warehouse_id):
     dao_factory = DAOFactory(conn)
     stats = dao_factory.get_local_statistics_dao()
