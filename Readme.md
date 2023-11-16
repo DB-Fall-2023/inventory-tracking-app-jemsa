@@ -30,35 +30,34 @@ Heroku CLI: heroku pg:psql postgresql-vertical-44021 --app postgres-sql
 ___
 
 ## Routes for Entities 
-Change http://127.0.0.1:5000/ (Localhost) to whatever app.py gives you if needed.
  
-http://127.0.0.1:5000/jemsa/users
+https://postgres-sql-6aba726b2968.herokuapp.com/jemsa/users
 
-http://127.0.0.1:5000/jemsa/racks
+https://postgres-sql-6aba726b2968.herokuapp.com/jemsa/racks
 
-http://127.0.0.1:5000/jemsa/users
+https://postgres-sql-6aba726b2968.herokuapp.com/jemsa/users
 
-http://127.0.0.1:5000/jemsa/warehouses
+https://postgres-sql-6aba726b2968.herokuapp.com/warehouses
 
-http://127.0.0.1:5000/jemsa/suppliers
+https://postgres-sql-6aba726b2968.herokuapp.com/jemsa/suppliers
 
-http://127.0.0.1:5000/jemsa/transactions
+https://postgres-sql-6aba726b2968.herokuapp.com/jemsa/transactions
 
-http://127.0.0.1:5000/jemsa/incoming_transactions
+https://postgres-sql-6aba726b2968.herokuapp.com/jemsa/incoming_transactions
 
-http://127.0.0.1:5000/jemsa/outgoing_transactions
+https://postgres-sql-6aba726b2968.herokuapp.com/jemsa/outgoing_transactions
 
-http://127.0.0.1:5000/jemsa/transfer_transactions
+https://postgres-sql-6aba726b2968.herokuapp.com/jemsa/transfer_transactions
 
-http://127.0.0.1:5000/jemsa/receivers
+https://postgres-sql-6aba726b2968.herokuapp.com/jemsa/receivers
 
 ---
 ## Routes for Statistics
-http://127.0.0.1:5000/jemsa/warehouse (Append ID and specific route + json body with userID for validation)
+https://postgres-sql-6aba726b2968.herokuapp.com/jemsa/warehouse (Append ID and specific route + json body with userID for validation)
 
-http://127.0.0.1:5000/jemsa/most (Append specific route)
+https://postgres-sql-6aba726b2968.herokuapp.com/jemsa/most (Append specific route)
 
-http://127.0.0.1:5000/jemsa/least (same as above)
+https://postgres-sql-6aba726b2968.herokuapp.com/jemsa/least (same as above)
 
 ---
 Json Specifics provided in excel file.
