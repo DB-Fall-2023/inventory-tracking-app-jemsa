@@ -16,7 +16,7 @@ def create_transaction():
     transaction_dao = dao_factory.get_inventory_transfer_transactions_dao()
 
     try:
-        transaction = transaction_dao.create_transactions(part_id, part_id, sourcewarehouse_id, receivingwarehouse_id)
+        transaction = transaction_dao.create_transactions(part_id, sourcewarehouse_id, receivingwarehouse_id)
         response = {
             'message': 'Transaction created successfully',
             'Transfer TransactionID': transaction[0]

@@ -11,6 +11,9 @@ from Handlers.inventory_incoming_transactions_handler import inventory_incoming_
 from Handlers.inventory_outgoing_transactions_handler import inventory_outgoing_transaction_handler
 from Handlers.inventory_transfer_transaction_handler import inventory_transfer_transaction_handler
 from Handlers.outgoing_transaction_reciever_handler import outgoing_transaction_receiver_handler
+from Handlers.local_statistics_handler import local_statistics_handler
+from Handlers.least_global_statistics_handler import least_global_statistics_handler
+from Handlers.most_global_statistics_handler import most_global_statistics_handler
 
 
 app = Flask(__name__)
@@ -28,6 +31,10 @@ app.register_blueprint(inventory_incoming_transaction_handler, url_prefix='/jems
 app.register_blueprint(inventory_outgoing_transaction_handler, url_prefix='/jemsa/outgoing_transactions')
 app.register_blueprint(inventory_transfer_transaction_handler, url_prefix='/jemsa/transfer_transactions')
 app.register_blueprint(outgoing_transaction_receiver_handler, url_prefix='/jemsa/receivers')
+# Similar route to warehouses, but meant for local statistics.
+app.register_blueprint(local_statistics_handler, url_prefix='/jemsa/warehouse')
+app.register_blueprint(most_global_statistics_handler, url_prefix='/jemsa/most')
+app.register_blueprint(least_global_statistics_handler, url_prefix='/jemsa/least')
 
 
 
