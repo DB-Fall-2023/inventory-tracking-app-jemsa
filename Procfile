@@ -1,0 +1,1 @@
+web: gunicorn ProjectFolder.app:app
