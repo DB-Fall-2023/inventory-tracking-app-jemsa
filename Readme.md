@@ -35,7 +35,7 @@ https://postgres-sql-6aba726b2968.herokuapp.com/jemsa/users
 
 https://postgres-sql-6aba726b2968.herokuapp.com/jemsa/racks
 
-https://postgres-sql-6aba726b2968.herokuapp.com/jemsa/users
+https://postgres-sql-6aba726b2968.herokuapp.com/jemsa/receivers
 
 https://postgres-sql-6aba726b2968.herokuapp.com/warehouses
 
