@@ -5,9 +5,9 @@ class Inventory_Outgoing_TransactionsDAO(BaseDAO):
     def __init__(self, conn):
         super().__init__(conn)
 
-    def create_transactions(self, part_id, rack_id, reciever_id, warehouse_id):
-        query = 'INSERT INTO "Inventory_Outgoing_Transactions" ("PartID", "RackID", "RecieverID", "WarehouseID") VALUES (%s, %s, %s, %s) RETURNING "TransactionID";'
-        cur = self.execute_query(query, (part_id, rack_id, reciever_id, warehouse_id,))
+    def create_transactions(self, part_id, rack_id, receiver_id, warehouse_id):
+        query = 'INSERT INTO "Inventory_Outgoing_Transactions" ("PartID", "RackID", "ReceiverID", "WarehouseID") VALUES (%s, %s, %s, %s) RETURNING "TransactionID";'
+        cur = self.execute_query(query, (part_id, rack_id, receiver_id, warehouse_id,))
         self.commit()
         return cur.fetchone()
 

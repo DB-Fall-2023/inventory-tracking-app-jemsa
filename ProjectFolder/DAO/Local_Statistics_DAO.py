@@ -22,7 +22,9 @@ class LocalStatisticsDAO(BaseDAO):
     def get_rack_lowstock(self, warehouse_id):
         query = '''SELECT "RackID", (("RackQuantity"/"RackCapacity")) as capacity_percent
         From "Racks"
-        Where (("RackQuantity"/"RackCapacity")) < 0.25 and "WarehouseID" = %s;'''
+        Where (("RackQuantity"/"RackCapacity")) < 0.25 and "WarehouseID" = 3
+        Order by "capacity_percent" desc
+        Limit 5;'''
         cur = self.execute_query(query, (warehouse_id,))
         return cur.fetchall()
 

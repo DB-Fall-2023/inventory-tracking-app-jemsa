@@ -6,7 +6,7 @@ class SuppliersDAO(BaseDAO):
         super().__init__(conn)
 
     def create_suppliers(self, supplier_name, supplier_address, supplier_city):
-        query = 'INSERT INTO "Suppliers" ("SupplierName", "SupplierAddress", "SupplierCity") VALUES (%s, %s, %s, %s) RETURNING "SupplierID";'
+        query = 'INSERT INTO "Suppliers" ("SupplierName", "SupplierAddress", "SupplierCity") VALUES (%s, %s, %s) RETURNING "SupplierID";'
         cur = self.execute_query(query, (supplier_name, supplier_address, supplier_city,))
         self.commit()
         return cur.fetchone()

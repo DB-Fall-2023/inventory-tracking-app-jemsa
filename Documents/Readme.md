@@ -36,9 +36,9 @@ http://127.0.0.1:5000/jemsa/receivers
 
 ---
 ## Routes for Statistics
-http://127.0.0.1:5000/jemsa/warehouse (Append ID and specifics)
+http://127.0.0.1:5000/jemsa/warehouse (Append ID and specific route + json body with userID for validation)
 
-http://127.0.0.1:5000/jemsa/most (Append specifics)
+http://127.0.0.1:5000/jemsa/most (Append specific route)
 
 http://127.0.0.1:5000/jemsa/least (same as above)
 

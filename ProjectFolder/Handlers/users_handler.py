@@ -8,14 +8,15 @@ user_handler = Blueprint('user_handler', __name__)
 @user_handler.route('/', methods=['POST'])
 def create_users():
     data = request.get_json()
-    username = data.get('UserName')
+    username = data.get('Username')
     warehouse_id = data.get('WarehouseID')
+    email = data.get('UserEmail')
 
     dao_factory = DAOFactory(conn)
     user_dao = dao_factory.get_users_dao()
 
     try:
-        user_id = user_dao.create_user(username, warehouse_id)
+        user_id = user_dao.create_user(username, warehouse_id, email)
         response = {
             'message': 'User created successfully',
             'UserID': user_id[0]
@@ -40,7 +41,8 @@ def get_users():
             user_data = {
                 'user_id': user[0],
                 'username': user[1],
-                'warehouse_id': user[2]
+                'warehouse_id': user[2],
+                'user_email': user[3]
             }
             response.append(user_data)
 
@@ -61,7 +63,8 @@ def get_user_by_id(user_id):
         if user:
             response = {
                 'username': user[1],
-                'warehouse_id': user[2]
+                'warehouse_id': user[2],
+                'user_email': user[3]
             }
 
             return jsonify(response)
@@ -78,15 +81,17 @@ def update_user(user_id):
     data = request.get_json()
     new_username = data.get('UserName')
     new_warehouse = data.get('WarehouseID')
+    email = data.get('UserEmail')
     dao_factory = DAOFactory(conn)
     user_dao = dao_factory.get_users_dao()
 
     try:
-        user_dao.update_user_by_id(user_id, new_username, new_warehouse)
+        user_dao.update_user_by_id(user_id, new_username, new_warehouse, email)
         user = user_dao.get_user_by_id(user_id)
         if user and (
                 user[1] == new_username and
-                user[2] == new_warehouse
+                user[2] == new_warehouse and
+                user[3] == email
         ):
             return jsonify(message=f'User {user_id} updated successfully')
 

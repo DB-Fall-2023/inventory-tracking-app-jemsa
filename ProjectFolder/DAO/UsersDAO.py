@@ -3,9 +3,9 @@ from DAO.dao import BaseDAO
 class UsersDAO(BaseDAO):
     def __init__(self, conn):
         super().__init__(conn)
-    def create_user(self, username, warehouseid):
-        query = 'INSERT INTO "Users" ("Username", "WarehouseID") VALUES (%s, %s) RETURNING "UserID";'
-        cur = self.execute_query(query, (username, warehouseid))
+    def create_user(self, username, warehouseid, user_email):
+        query = 'INSERT INTO "Users" ("Username", "WarehouseID", "UserEmail") VALUES (%s, %s, %s) RETURNING "UserID";'
+        cur = self.execute_query(query, (username, warehouseid, user_email))
         self.commit()
         return cur.fetchone()
 
@@ -29,9 +29,9 @@ class UsersDAO(BaseDAO):
         cur = self.execute_query(query, (warehouseid,))
         return cur.fetchall()
 
-    def update_user_by_id(self, user_id, new_username, new_warehouse):
-        query = 'UPDATE "Users" Set "Username" = %s, "WarehouseID" = %s WHERE "UserID" = %s;'
-        self.execute_query(query, (new_username, new_warehouse, user_id))
+    def update_user_by_id(self, user_id, new_username, new_warehouse, new_email):
+        query = 'UPDATE "Users" Set "Username" = %s, "WarehouseID" = %s, "UserEmail" = %s WHERE "UserID" = %s;'
+        self.execute_query(query, (new_username, new_warehouse, new_email, user_id))
         self.commit()
 
     def delete_user_by_id(self, user_id):
