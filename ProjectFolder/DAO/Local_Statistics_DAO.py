@@ -81,9 +81,9 @@ class LocalStatisticsDAO(BaseDAO):
         return cur.fetchall()
 
 
-    def get_users_recievesmost(self, warehouse_id):
+    def get_users_receivesmost(self, warehouse_id):
         query = '''Select "UserID", "Username", count("TransactionID") as count
-            FROM "Users" natural join "Transactions"
+            FROM "Users" natural join "Transactions" natural join "Inventory_Transfer_Transactions"
             Where "WarehouseID" = %s
             Group by "UserID", "Username"
             ORDER BY count desc

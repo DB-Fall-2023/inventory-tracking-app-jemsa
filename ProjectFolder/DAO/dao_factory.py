@@ -9,6 +9,8 @@ from .Inventory_Outgoing_TransactionsDAO import Inventory_Outgoing_TransactionsD
 from .Inventory_Transfer_TransactionsDAO import Inventory_Transfer_TransactionsDAO
 from .Outgoing_Transaction_ReceiversDAO import Outgoing_Transaction_ReceiversDAO
 from .Local_Statistics_DAO import LocalStatisticsDAO
+from .Most_Global_Statistics_DAO import MostGlobalStatisticsDAO
+from .Least_Global_Statistics_DAO import LeastGlobalStatisticsDAO
 
 
 class DAOFactory:
@@ -47,3 +49,9 @@ class DAOFactory:
 
     def get_local_statistics_dao(self):
         return LocalStatisticsDAO(self.conn)
+
+    def get_most_global_statistics_dao(self):
+        return MostGlobalStatisticsDAO(self.conn)
+
+    def get_least_global_statistics_dao(self):
+        return LeastGlobalStatisticsDAO(self.conn)

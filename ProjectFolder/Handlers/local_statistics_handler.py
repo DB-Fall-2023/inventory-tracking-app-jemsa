@@ -154,13 +154,13 @@ def get_transaction_leastcost(warehouse_id):
         return jsonify(error=error_message), 500
 
 
-@local_statistics_handler.route('/<int:warehouse_id>/users/recievesmost', methods=['GET'])
-def get_users_recievesmost(warehouse_id):
+@local_statistics_handler.route('/<int:warehouse_id>/users/receivesmost', methods=['GET'])
+def get_users_receivesmost(warehouse_id):
     dao_factory = DAOFactory(conn)
     stats = dao_factory.get_local_statistics_dao()
 
     try:
-        users = stats.get_users_recievesmost(warehouse_id)
+        users = stats.get_users_receivesmost(warehouse_id)
         response = []
         for user in users:
             response_data = {
@@ -173,7 +173,7 @@ def get_users_recievesmost(warehouse_id):
         if response:
             return jsonify(response), 201
         else:
-            return jsonify(message=f'No transactions have been made by users in Warehouse #{warehouse_id}')
+            return jsonify(message=f'No exchange transactions have been made by users in Warehouse #{warehouse_id}')
 
     except Exception as e:
         error_message = str(e)
