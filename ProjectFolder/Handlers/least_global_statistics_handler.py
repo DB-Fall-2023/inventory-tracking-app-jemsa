@@ -5,7 +5,7 @@ from config.connectHeroku import conn
 least_global_statistics_handler = Blueprint('least_global_statistics_handler', __name__)
 
 
-@least_global_statistics_handler.route('/outgoing', methods=['POST'])
+@least_global_statistics_handler.route('/outgoing', methods=['GET'])
 def get_least_outgoing():
     dao_factory = DAOFactory(conn)
     stats = dao_factory.get_least_global_statistics_dao()
