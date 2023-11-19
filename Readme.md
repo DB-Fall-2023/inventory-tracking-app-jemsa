@@ -31,23 +31,23 @@ ___
 
 ## Routes for Entities 
  
-https://postgres-sql-6aba726b2968.herokuapp.com/jemsa/users
+https://postgres-sql-6aba726b2968.herokuapp.com/jemsa/user
 
-https://postgres-sql-6aba726b2968.herokuapp.com/jemsa/racks
+https://postgres-sql-6aba726b2968.herokuapp.com/jemsa/rack
 
-https://postgres-sql-6aba726b2968.herokuapp.com/jemsa/parts
+https://postgres-sql-6aba726b2968.herokuapp.com/jemsa/part
 
-https://postgres-sql-6aba726b2968.herokuapp.com/jemsa/warehouses
+https://postgres-sql-6aba726b2968.herokuapp.com/jemsa/warehouse
 
-https://postgres-sql-6aba726b2968.herokuapp.com/jemsa/suppliers
+https://postgres-sql-6aba726b2968.herokuapp.com/jemsa/supplier
 
 https://postgres-sql-6aba726b2968.herokuapp.com/jemsa/transactions
 
-https://postgres-sql-6aba726b2968.herokuapp.com/jemsa/incoming_transactions
+https://postgres-sql-6aba726b2968.herokuapp.com/jemsa/incoming
 
-https://postgres-sql-6aba726b2968.herokuapp.com/jemsa/outgoing_transactions
+https://postgres-sql-6aba726b2968.herokuapp.com/jemsa/outgoing
 
-https://postgres-sql-6aba726b2968.herokuapp.com/jemsa/transfer_transactions
+https://postgres-sql-6aba726b2968.herokuapp.com/jemsa/exchange
 
 https://postgres-sql-6aba726b2968.herokuapp.com/jemsa/receivers
 
