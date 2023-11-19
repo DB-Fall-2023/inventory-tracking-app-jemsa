@@ -62,7 +62,7 @@ def get_supplier_by_id(supplier_id):
         suppliers = suppliers_dao.get_suppliers_by_id(supplier_id)
         if suppliers:
             response = {
-                'supplier_id': suppliers[4],
+                'supplier_id': suppliers[3],
                 'supplier_name': suppliers[0],
                 'supplier_address': suppliers[1],
                 'supplier_city': suppliers[2]
