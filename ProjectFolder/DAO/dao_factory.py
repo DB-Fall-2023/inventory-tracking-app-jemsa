@@ -11,6 +11,7 @@ from .Outgoing_Transaction_ReceiversDAO import Outgoing_Transaction_ReceiversDAO
 from .Local_Statistics_DAO import LocalStatisticsDAO
 from .Most_Global_Statistics_DAO import MostGlobalStatisticsDAO
 from .Least_Global_Statistics_DAO import LeastGlobalStatisticsDAO
+from .front_statsDAO import FrontStatsDAO
 
 
 class DAOFactory:
@@ -55,3 +56,6 @@ class DAOFactory:
 
     def get_least_global_statistics_dao(self):
         return LeastGlobalStatisticsDAO(self.conn)
+
+    def get_front_stats_dao(self):
+        return FrontStatsDAO(self.conn)

@@ -14,6 +14,7 @@ from Handlers.outgoing_transaction_reciever_handler import outgoing_transaction_
 from Handlers.local_statistics_handler import local_statistics_handler
 from Handlers.least_global_statistics_handler import least_global_statistics_handler
 from Handlers.most_global_statistics_handler import most_global_statistics_handler
+from Handlers.front_stats_handler import front_stats_handler
 
 
 app = Flask(__name__)
@@ -35,6 +36,7 @@ app.register_blueprint(outgoing_transaction_receiver_handler, url_prefix='/jemsa
 app.register_blueprint(local_statistics_handler, url_prefix='/jemsa/warehouse')
 app.register_blueprint(most_global_statistics_handler, url_prefix='/jemsa/most')
 app.register_blueprint(least_global_statistics_handler, url_prefix='/jemsa/least')
+app.register_blueprint(front_stats_handler, url_prefix='/jemsa/frontstats')
 
 
 
