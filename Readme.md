@@ -41,8 +41,6 @@ https://postgres-sql-6aba726b2968.herokuapp.com/jemsa/warehouse
 
 https://postgres-sql-6aba726b2968.herokuapp.com/jemsa/supplier
 
-https://postgres-sql-6aba726b2968.herokuapp.com/jemsa/transactions
-
 https://postgres-sql-6aba726b2968.herokuapp.com/jemsa/incoming
 
 https://postgres-sql-6aba726b2968.herokuapp.com/jemsa/outgoing
