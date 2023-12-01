@@ -44,3 +44,8 @@ class WarehousesDAO(BaseDAO):
         query = 'DELETE FROM "Warehouses" Where "WarehouseID" = %s;'
         self.execute_query(query, (warehouse_id,))
         self.commit()
+
+    def rollback(self):
+        cur = self.conn.cursor()
+        cur.execute("ROLLBACK")
+        self.conn.commit()

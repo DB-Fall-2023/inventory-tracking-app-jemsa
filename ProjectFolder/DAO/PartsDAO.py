@@ -29,3 +29,8 @@ class PartsDAO(BaseDAO):
         query = 'DELETE FROM "Parts" Where "PartID" = %s;'
         self.execute_query(query, (part_id,))
         self.commit()
+
+    def rollback(self):
+        cur = self.conn.cursor()
+        cur.execute("ROLLBACK")
+        self.conn.commit()

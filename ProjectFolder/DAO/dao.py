@@ -12,3 +12,8 @@ class BaseDAO:
 
     def commit(self):
         self.conn.commit()
+
+    def rollback(self):
+        cur = self.conn.cursor()
+        cur.execute("ROLLBACK")
+        self.conn.commit()

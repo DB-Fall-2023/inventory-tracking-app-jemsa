@@ -24,6 +24,7 @@ def create_rack():
 
     except Exception as e:
         error_message = str(e)
+        RacksDAO.rollback()
         return jsonify(error=error_message), 500
 
 
@@ -50,6 +51,7 @@ def get_rack():
 
     except Exception as e:
         error_message = str(e)
+        RacksDAO.rollback()
         return jsonify(error=error_message), 500
 
 
@@ -69,10 +71,12 @@ def get_rack_by_id(rack_id):
 
             return jsonify(response)
         else:
+            RacksDAO.rollback()
             return jsonify(error='Rack not found'), 404
 
     except Exception as e:
         error_message = str(e)
+        RacksDAO.rollback()
         return jsonify(error=error_message), 500
 
 #confirm route and method
@@ -98,6 +102,7 @@ def get_rack_by_warehouse_id(warehouse_id):
 
     except Exception as e:
         error_message = str(e)
+        RacksDAO.rollback()
         return jsonify(error=error_message), 500
 
 
@@ -117,10 +122,12 @@ def update_rack(rack_id):
             return jsonify(message=f'Rack {rack_id} updated successfully')
 
         else:
+            RacksDAO.rollback()
             return jsonify(error='Rack not found'), 404
 
     except Exception as e:
         error_message = str(e)
+        RacksDAO.rollback()
         return jsonify(error=error_message), 500
 
 
@@ -140,8 +147,10 @@ def delete_rack(rack_id):
                 return jsonify(error='Rack could not be deleted'), 404
 
         else:
+            RacksDAO.rollback()
             return jsonify(error='Rack not found'), 404
 
     except Exception as e:
         error_message = str(e)
+        RacksDAO.rollback()
         return jsonify(error=error_message), 500

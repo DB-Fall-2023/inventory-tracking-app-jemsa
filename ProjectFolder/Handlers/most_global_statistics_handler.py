@@ -50,10 +50,12 @@ def get_most_incoming():
         if response:
             return jsonify(response), 201
         else:
+            stats.rollback()
             return jsonify(message='Warehouse transaction count could not be found')
 
     except Exception as e:
         error_message = str(e)
+        stats.rollback()
         return jsonify(error=error_message), 500
 
 
@@ -76,10 +78,12 @@ def get_most_deliver():
         if response:
             return jsonify(response), 201
         else:
+            stats.rollback()
             return jsonify(message='Warehouse exchange count could not be found')
 
     except Exception as e:
         error_message = str(e)
+        stats.rollback()
         return jsonify(error=error_message), 500
 
 
@@ -102,10 +106,12 @@ def get_most_transactions():
         if response:
             return jsonify(response), 201
         else:
+            stats.rollback()
             return jsonify(message='User transaction count could not be found')
 
     except Exception as e:
         error_message = str(e)
+        stats.rollback()
         return jsonify(error=error_message), 500
 
 
@@ -127,8 +133,10 @@ def get_most_city():
         if response:
             return jsonify(response), 201
         else:
+            stats.rollback()
             return jsonify(message='City transaction count could not be found')
 
     except Exception as e:
         error_message = str(e)
+        stats.rollback()
         return jsonify(error=error_message), 500

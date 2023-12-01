@@ -38,3 +38,8 @@ class UsersDAO(BaseDAO):
         query = 'DELETE FROM "Users" WHERE "UserID" = %s;'
         self.execute_query(query, (user_id,))
         self.commit()
+
+    def rollback(self):
+        cur = self.conn.cursor()
+        cur.execute("ROLLBACK")
+        self.conn.commit()

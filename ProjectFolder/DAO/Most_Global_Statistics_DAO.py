@@ -73,4 +73,7 @@ class MostGlobalStatisticsDAO(BaseDAO):
         self.commit()
         return cur.fetchall()
 
-
+    def rollback(self):
+        cur = self.conn.cursor()
+        cur.execute("ROLLBACK")
+        self.conn.commit()

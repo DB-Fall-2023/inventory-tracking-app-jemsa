@@ -28,4 +28,5 @@ def get_least_outgoing():
 
     except Exception as e:
         error_message = str(e)
+        stats.rollback()
         return jsonify(error=error_message), 500

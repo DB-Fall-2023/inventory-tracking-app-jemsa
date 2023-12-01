@@ -35,3 +35,8 @@ class RacksDAO(BaseDAO):
         query = 'DELETE FROM "Racks" Where "RackID" = %s;'
         self.execute_query(query, (racks_id,))
         self.commit()
+
+    def rollback(self):
+        cur = self.conn.cursor()
+        cur.execute("ROLLBACK")
+        self.conn.commit()

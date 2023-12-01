@@ -29,6 +29,7 @@ def create_transaction():
 
     except Exception as e:
         error_message = str(e)
+        transaction_dao.rollback()
         return jsonify(error=error_message), 500
 
 
@@ -58,6 +59,7 @@ def get_transactions():
 
     except Exception as e:
         error_message = str(e)
+        transactions_dao.rollback()
         return jsonify(error=error_message), 500
 
 
@@ -79,13 +81,14 @@ def get_transactions_by_id(transaction_id):
                 'transaction_date': transaction[6],
                 'profit': transaction[7]
             }
-
             return jsonify(response)
         else:
+            transactions_dao.rollback()
             return jsonify(error='Transaction not found'), 404
 
     except Exception as e:
         error_message = str(e)
+        transactions_dao.rollback()
         return jsonify(error=error_message), 500
 
 
@@ -118,9 +121,11 @@ def update_transactions(transaction_id):
             return jsonify(message=f'Transaction {transaction_id} updated successfully')
 
         else:
+            transactions_dao.rollback()
             return jsonify(error='Transaction not found'), 404
 
     except Exception as e:
         error_message = str(e)
+        transactions_dao.rollback()
         return jsonify(error=error_message), 500
 

@@ -27,10 +27,12 @@ def get_warehouse_profits(warehouse_id):
             if response:
                 return jsonify(response), 201
             else:
+                stats.rollback()
                 return jsonify(message=f'Warehouse #{warehouse_id} has no records')
 
         except Exception as e:
             error_message = str(e)
+            stats.rollback()
             return jsonify(error=error_message), 500
 
     else:
@@ -58,10 +60,12 @@ def get_rack_lowstock(warehouse_id):
             if response:
                 return jsonify(response), 201
             else:
+                stats.rollback()
                 return jsonify(message=f'No such racks found at Warehouse #{warehouse_id}')
 
         except Exception as e:
             error_message = str(e)
+            stats.rollback()
             return jsonify(error=error_message), 500
 
     else:
@@ -89,10 +93,12 @@ def get_rack_material(warehouse_id):
             if response:
                 return jsonify(response), 201
             else:
+                stats.rollback()
                 return jsonify(message=f'No parts found at warehouse #{warehouse_id}')
 
         except Exception as e:
             error_message = str(e)
+            stats.rollback()
             return jsonify(error=error_message), 500
 
     else:
@@ -119,10 +125,12 @@ def get_rack_expensive(warehouse_id):
             if expensive:
                 return jsonify(response), 201
             else:
+                stats.rollback()
                 return jsonify(message=f'No racks at warehouse #{warehouse_id}')
 
         except Exception as e:
             error_message = str(e)
+            stats.rollback()
             return jsonify(error=error_message), 500
 
     else:
@@ -149,10 +157,12 @@ def get_transaction_suppliers(warehouse_id):
             if suppliers:
                 return jsonify(response), 201
             else:
+                stats.rollback()
                 return jsonify(message=f'No suppliers have supplied warehouse #{warehouse_id}')
 
         except Exception as e:
             error_message = str(e)
+            stats.rollback()
             return jsonify(error=error_message), 500
 
     else:
@@ -180,10 +190,12 @@ def get_transaction_leastcost(warehouse_id):
             if response:
                 return jsonify(response), 201
             else:
+                stats.rollback()
                 return jsonify(message=f'No incoming transactions have been made by Warehouse #{warehouse_id}')
 
         except Exception as e:
             error_message = str(e)
+            stats.rollback()
             return jsonify(error=error_message), 500
 
     else:
@@ -212,10 +224,12 @@ def get_users_receivesmost(warehouse_id):
             if response:
                 return jsonify(response), 201
             else:
+                stats.rollback()
                 return jsonify(message=f'No exchange transactions have been made by users in Warehouse #{warehouse_id}')
 
         except Exception as e:
             error_message = str(e)
+            stats.rollback()
             return jsonify(error=error_message), 500
 
     else:
