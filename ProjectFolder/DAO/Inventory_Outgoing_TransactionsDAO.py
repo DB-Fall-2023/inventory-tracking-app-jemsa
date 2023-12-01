@@ -22,7 +22,7 @@ class Inventory_Outgoing_TransactionsDAO(BaseDAO):
         return cur.fetchone()
 
     def update_transactions_by_id(self, transaction_id, part_id, rack_id, reciever_id, warehouse_id, user_id, transaction_date, profit):
-        query = 'UPDATE "Inventory_Outgoing_Transactions" Set "PartID" = %s, "RackID" = %s, "RecieverID" = %s, "WarehouseID" = %s, "UserID" = %s, "TransactionDate" = %s, "Profit" = %s WHERE "TransactionID" = %s;'
+        query = 'UPDATE "Inventory_Outgoing_Transactions" Set "PartID" = %s, "RackID" = %s, "ReceiverID" = %s, "WarehouseID" = %s, "UserID" = %s, "TransactionDate" = %s, "Profit" = %s WHERE "TransactionID" = %s;'
         self.execute_query(query, (part_id, rack_id, reciever_id, warehouse_id,  user_id, transaction_date, profit, transaction_id,))
         self.commit()
 
