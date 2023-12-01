@@ -93,3 +93,8 @@ class LocalStatisticsDAO(BaseDAO):
         cur = self.execute_query(query, (warehouse_id,))
         self.commit()
         return cur.fetchall()
+
+    def rollback(self):
+        cur = self.conn.cursor()
+        cur.execute("ROLLBACK")
+        self.conn.commit()

@@ -25,3 +25,8 @@ class Outgoing_Transaction_ReceiversDAO(BaseDAO):
         query = 'UPDATE "Outgoing_Transaction_Receiver" Set "ReceiverName" = %s WHERE "ReceiverID" = %s;'
         self.execute_query(query, (receiver_name, receiver_id))
         self.commit()
+
+    def rollback(self):
+        cur = self.conn.cursor()
+        cur.execute("ROLLBACK")
+        self.conn.commit()

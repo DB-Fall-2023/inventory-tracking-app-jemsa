@@ -23,6 +23,7 @@ def create_receiver():
 
     except Exception as e:
         error_message = str(e)
+        receiver_dao.rollback()
         return jsonify(error=error_message), 500
 
 
@@ -46,6 +47,7 @@ def get_receivers():
 
     except Exception as e:
         error_message = str(e)
+        receivers_dao.rollback()
         return jsonify(error=error_message), 500
 
 
@@ -68,6 +70,7 @@ def get_receivers_by_id(receiver_id):
 
     except Exception as e:
         error_message = str(e)
+        receivers_dao.rollback()
         return jsonify(error=error_message), 500
 
 
@@ -93,5 +96,6 @@ def update_transactions(receiver_id):
 
     except Exception as e:
         error_message = str(e)
+        receivers_dao.rollback()
         return jsonify(error=error_message), 500
 

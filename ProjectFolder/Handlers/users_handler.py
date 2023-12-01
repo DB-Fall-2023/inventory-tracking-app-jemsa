@@ -25,6 +25,7 @@ def create_users():
 
     except Exception as e:
         error_message = str(e)
+        user_dao.rollback()
         return jsonify(error=error_message), 500
 
 
@@ -50,6 +51,7 @@ def get_users():
 
     except Exception as e:
         error_message = str(e)
+        user_dao.rollback()
         return jsonify(error=error_message), 500
 
 
@@ -69,10 +71,12 @@ def get_user_by_id(user_id):
 
             return jsonify(response)
         else:
+            user_dao.rollback()
             return jsonify(error='User not found'), 404
 
     except Exception as e:
         error_message = str(e)
+        user_dao.rollback()
         return jsonify(error=error_message), 500
 
 
@@ -96,10 +100,12 @@ def update_user(user_id):
             return jsonify(message=f'User {user_id} updated successfully')
 
         else:
+            user_dao.rollback()
             return jsonify(error='User not found'), 404
 
     except Exception as e:
         error_message = str(e)
+        user_dao.rollback()
         return jsonify(error=error_message), 500
 
 
@@ -117,8 +123,10 @@ def delete_user(user_id):
             else:
                 return jsonify(error='User not found'), 404
         else:
+            user_dao.rollback()
             return jsonify(error='User not found'), 404
 
     except Exception as e:
         error_message = str(e)
+        user_dao.rollback()
         return jsonify(error=error_message), 500

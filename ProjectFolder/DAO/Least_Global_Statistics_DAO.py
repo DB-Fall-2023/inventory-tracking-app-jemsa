@@ -14,3 +14,8 @@ class LeastGlobalStatisticsDAO(BaseDAO):
         cur = self.execute_query(query)
         self.commit()
         return cur.fetchall()
+
+    def rollback(self):
+        cur = self.conn.cursor()
+        cur.execute("ROLLBACK")
+        self.conn.commit()

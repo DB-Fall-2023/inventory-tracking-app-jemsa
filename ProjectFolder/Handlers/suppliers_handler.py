@@ -25,6 +25,7 @@ def create_supplier():
 
     except Exception as e:
         error_message = str(e)
+        supplier_dao.rollback()
         return jsonify(error=error_message), 500
 
 
@@ -50,6 +51,7 @@ def get_suppliers():
 
     except Exception as e:
         error_message = str(e)
+        suppliers_dao.rollback()
         return jsonify(error=error_message), 500
 
 
@@ -70,10 +72,12 @@ def get_supplier_by_id(supplier_id):
 
             return jsonify(response)
         else:
+            suppliers_dao.rollback()
             return jsonify(error='Supplier not found'), 404
 
     except Exception as e:
         error_message = str(e)
+        suppliers_dao.rollback()
         return jsonify(error=error_message), 500
 
 
@@ -97,10 +101,12 @@ def update_supplier(supplier_id):
             return jsonify(message=f'Supplier {supplier_id} updated successfully')
 
         else:
+            suppliers_dao.rollback()
             return jsonify(error='Supplier not found'), 404
 
     except Exception as e:
         error_message = str(e)
+        suppliers_dao.rollback()
         return jsonify(error=error_message), 500
 
 
@@ -118,8 +124,10 @@ def delete_supplier(supplier_id):
             else:
                 return jsonify(error='Supplier not found'), 404
         else:
+            suppliers_dao.rollback()
             return jsonify(error='Supplier not found'), 404
 
     except Exception as e:
         error_message = str(e)
+        suppliers_dao.rollback()
         return jsonify(error=error_message), 500

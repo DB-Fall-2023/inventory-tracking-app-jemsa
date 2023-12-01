@@ -26,6 +26,7 @@ def create_part():
 
     except Exception as e:
         error_message = str(e)
+        PartsDAO.rollback()
         return jsonify(error=error_message), 500
 
 
@@ -51,6 +52,7 @@ def get_parts():
 
     except Exception as e:
         error_message = str(e)
+        PartsDAO.rollback()
         return jsonify(error=error_message), 500
 
 
@@ -70,10 +72,12 @@ def get_part_by_id(part_id):
 
             return jsonify(response)
         else:
+            PartsDAO.rollback()
             return jsonify(error='Part not found'), 404
 
     except Exception as e:
         error_message = str(e)
+        PartsDAO.rollback()
         return jsonify(error=error_message), 500
 
 
@@ -93,10 +97,12 @@ def update_part(part_id):
             return jsonify(message=f'Part {part_id} updated successfully')
 
         else:
+            PartsDAO.rollback()
             return jsonify(error='Part not found'), 404
 
     except Exception as e:
         error_message = str(e)
+        PartsDAO.rollback()
         return jsonify(error=error_message), 500
 
 
@@ -115,8 +121,10 @@ def delete_part(part_id):
                 return jsonify(error='Part could not be deleted'), 404
 
         else:
+            PartsDAO.rollback()
             return jsonify(error='Part not found'), 404
 
     except Exception as e:
         error_message = str(e)
+        PartsDAO.rollback()
         return jsonify(error=error_message), 500

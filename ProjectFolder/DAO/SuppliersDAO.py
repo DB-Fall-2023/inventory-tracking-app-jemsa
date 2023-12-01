@@ -30,3 +30,8 @@ class SuppliersDAO(BaseDAO):
         query = 'DELETE FROM "Suppliers" Where "SupplierID" = %s;'
         self.execute_query(query, (supplier_id,))
         self.commit()
+
+    def rollback(self):
+        cur = self.conn.cursor()
+        cur.execute("ROLLBACK")
+        self.conn.commit()

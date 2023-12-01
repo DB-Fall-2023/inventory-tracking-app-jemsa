@@ -25,3 +25,8 @@ class Inventory_Transfer_TransactionsDAO(BaseDAO):
         query = 'UPDATE "Inventory_Transfer_Transactions" Set "PartID" = %s, "SourceWarehouseID" = %s, "ReceivingWarehouseID" = %s, "UserID" = %s, "TransactionDate" = %s, "Profit" = %s WHERE "TransactionID" = %s;'
         self.execute_query(query, (part_id, part_id, source_warehouse_id, receiving_warehouse_id, user_id, transaction_date, profit, transaction_id))
         self.commit()
+
+    def rollback(self):
+        cur = self.conn.cursor()
+        cur.execute("ROLLBACK")
+        self.conn.commit()

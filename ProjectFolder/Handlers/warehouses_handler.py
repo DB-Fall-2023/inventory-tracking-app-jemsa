@@ -26,6 +26,7 @@ def create_warehouses():
 
     except Exception as e:
         error_message = str(e)
+        warehouse_dao.rollback()
         return jsonify(error=error_message), 500
 
 
@@ -52,6 +53,7 @@ def get_warehouses():
 
     except Exception as e:
         error_message = str(e)
+        warehouse_dao.rollback()
         return jsonify(error=error_message), 500
 
 
@@ -73,10 +75,12 @@ def get_warehouse_by_id(warehouse_id):
 
             return jsonify(response)
         else:
+            warehouse_dao.rollback()
             return jsonify(error='Warehouse not found'), 404
 
     except Exception as e:
         error_message = str(e)
+        warehouse_dao.rollback()
         return jsonify(error=error_message), 500
 
 
@@ -106,6 +110,7 @@ def update_warehouse(warehouse_id):
 
     except Exception as e:
         error_message = str(e)
+        warehouse_dao.rollback()
         return jsonify(error=error_message), 500
 
 
@@ -123,8 +128,10 @@ def delete_warehouse(warehouse_id):
             else:
                 return jsonify(error='Warehouse could not be deleted'), 404
         else:
+            warehouse_dao.rollback()
             return jsonify(error='Warehouse not found'), 404
 
     except Exception as e:
         error_message = str(e)
+        warehouse_dao.rollback()
         return jsonify(error=error_message), 500
