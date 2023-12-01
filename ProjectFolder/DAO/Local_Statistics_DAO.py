@@ -7,10 +7,10 @@ class LocalStatisticsDAO(BaseDAO):
     def get_warehouse_profit(self, warehouse_id):
         query = '''SELECT "WarehouseID", sum(combined_data.profit) as net_profit, extract(YEAR FROM "TransactionDate") AS year
                  FROM(SELECT "WarehouseID", "Profit" as profit, "TransactionDate"
-                 FROM "Inventory_Incoming_Transactions" natural join "Transactions"
+                 FROM "Inventory_Incoming_Transactions"
                  UNION ALL
                  SELECT "WarehouseID", "Profit" as profit, "TransactionDate"
-                 FROM "Inventory_Outgoing_Transactions" natural join "Transactions")
+                 FROM "Inventory_Outgoing_Transactions")
                  AS combined_data
                  Where "WarehouseID" = %s
                  GROUP BY year, "WarehouseID"
@@ -22,7 +22,7 @@ class LocalStatisticsDAO(BaseDAO):
     def get_rack_lowstock(self, warehouse_id):
         query = '''SELECT "RackID", (("RackQuantity"/"RackCapacity")) as capacity_percent
         From "Racks"
-        Where (("RackQuantity"/"RackCapacity")) < 0.25 and "WarehouseID" = 3
+        Where (("RackQuantity"/"RackCapacity")) < 0.25 and "WarehouseID" = %s
         Order by "capacity_percent" desc
         Limit 5;'''
         cur = self.execute_query(query, (warehouse_id,))
@@ -74,7 +74,7 @@ class LocalStatisticsDAO(BaseDAO):
 
     def get_transaction_leastcost(self, warehouse_id):
         query = '''SELECT  "TransactionDate", "Profit"
-            FROM "Transactions" natural join "Inventory_Incoming_Transactions"
+            FROM "Inventory_Incoming_Transactions"
             Where "WarehouseID" = %s
             ORDER BY "Profit" desc
             Limit 3;'''
@@ -85,7 +85,7 @@ class LocalStatisticsDAO(BaseDAO):
 
     def get_users_receivesmost(self, warehouse_id):
         query = '''Select "UserID", "Username", count("TransactionID") as count
-            FROM "Users" natural join "Transactions" natural join "Inventory_Transfer_Transactions"
+            FROM "Users" natural join "Inventory_Transfer_Transactions"
             Where "WarehouseID" = %s
             Group by "UserID", "Username"
             ORDER BY count desc

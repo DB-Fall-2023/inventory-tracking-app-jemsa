@@ -36,21 +36,39 @@ class MostGlobalStatisticsDAO(BaseDAO):
         return cur.fetchall()
 
     def get_most_transactions(self):
-        query = '''Select "UserID", "Username", count("TransactionID") as count
-            From "Users" natural join "Transactions"
-            Group by "UserID", "Username"
-            ORDER BY count desc
-            Limit 3;'''
+        query = '''SELECT combined_transactions."UserID", "Username", COUNT(DISTINCT combined_transactions."TransactionID") AS count
+                    FROM (
+                        SELECT "UserID", "TransactionID" FROM "Inventory_Transfer_Transactions"
+                        UNION ALL
+                        SELECT "UserID", "TransactionID" FROM "Inventory_Incoming_Transactions"
+                        UNION ALL
+                        SELECT "UserID", "TransactionID" FROM "Inventory_Outgoing_Transactions"
+                    ) AS combined_transactions
+                    JOIN "Users" ON combined_transactions."UserID" = "Users"."UserID"
+                    GROUP BY combined_transactions."UserID", "Username"
+                    ORDER BY count DESC
+                        LIMIT 3;'''
         cur = self.execute_query(query)
         self.commit()
         return cur.fetchall()
 
     def get_most_city(self):
-        query = '''Select "WarehouseCity", count("TransactionID") as count
-            From "Warehouses" natural join "Users" natural join "Transactions"
-            Group by "WarehouseCity"
-            Order by count desc
-            limit 3;'''
+        query = '''SELECT "WarehouseCity", COUNT("TransactionID") AS count
+                    FROM (
+                        SELECT "TransactionID", "UserID"
+                        FROM "Inventory_Transfer_Transactions"
+                        UNION ALL
+                        SELECT "TransactionID", "UserID"
+                        FROM "Inventory_Incoming_Transactions"
+                        UNION ALL
+                        SELECT "TransactionID", "UserID"
+                        FROM "Inventory_Outgoing_Transactions"
+                    ) AS combined_transactions
+                    JOIN "Users" ON combined_transactions."UserID" = "Users"."UserID"
+                    JOIN "Warehouses" ON "Users"."WarehouseID" = "Warehouses"."WarehouseID"
+                    GROUP BY "WarehouseCity"
+                    ORDER BY count DESC
+                    LIMIT 3;'''
         cur = self.execute_query(query)
         self.commit()
         return cur.fetchall()

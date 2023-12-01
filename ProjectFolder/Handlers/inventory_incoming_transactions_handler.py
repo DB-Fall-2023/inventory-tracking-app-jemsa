@@ -12,12 +12,15 @@ def create_transaction():
     supplier_id = data.get('SupplierID')
     rack_id = data.get('RackID')
     warehouse_id = data.get('WarehouseID')
+    user_id = data.get('UserID')
+    transaction_date = data.get('TransactionDate')
+    transaction_profit = data.get('Profit')
 
     dao_factory = DAOFactory(conn)
     transaction_dao = dao_factory.get_inventory_incoming_transactions_dao()
 
     try:
-        transaction = transaction_dao.create_transactions(part_id, supplier_id, rack_id, warehouse_id)
+        transaction = transaction_dao.create_transactions(part_id, supplier_id, rack_id, warehouse_id, user_id, transaction_date, transaction_profit)
         response = {
             'message': 'Transaction created successfully',
             'Incoming TransactionID': transaction[0]
@@ -44,7 +47,10 @@ def get_transactions():
                 'part_id': transaction[1],
                 'supplier_id': transaction[2],
                 'rack_id': transaction[3],
-                'warehouse_id': transaction[4]
+                'warehouse_id': transaction[4],
+                'user_id': transaction[5],
+                'transaction_date': transaction[6],
+                'profit': transaction[7]
             }
             response.append(transaction_data)
 
@@ -68,7 +74,10 @@ def get_transactions_by_id(transaction_id):
                 'part_id': transaction[1],
                 'supplier_id': transaction[2],
                 'rack_id': transaction[3],
-                'warehouse_id': transaction[4]
+                'warehouse_id': transaction[4],
+                'user_id': transaction[5],
+                'transaction_date': transaction[6],
+                'profit': transaction[7]
             }
 
             return jsonify(response)
@@ -87,18 +96,24 @@ def update_transactions(transaction_id):
     supplier_id = data.get('SupplierID')
     rack_id = data.get('RackID')
     warehouse_id = data.get('WarehouseID')
+    user_id = data.get('UserID')
+    transaction_date = data.get('TransactionDate')
+    transaction_profit = data.get('Profit')
 
     dao_factory = DAOFactory(conn)
     transactions_dao = dao_factory.get_inventory_incoming_transactions_dao()
 
     try:
-        transactions_dao.update_transactions_by_id(transaction_id, part_id, supplier_id, rack_id, warehouse_id)
+        transactions_dao.update_transactions_by_id(transaction_id, part_id, supplier_id, rack_id, warehouse_id, user_id, transaction_date, transaction_profit)
         transaction = transactions_dao.get_transactions_by_id(transaction_id)
         if transaction and (
                 transaction[1] == part_id and
                 transaction[2] == supplier_id and
                 transaction[3] == rack_id and
-                transaction[4] == warehouse_id
+                transaction[4] == warehouse_id and
+                transaction[5] == user_id and
+                transaction[6] == transaction_date and
+                transaction[7] == transaction_profit
         ):
             return jsonify(message=f'Transaction {transaction_id} updated successfully')
 
