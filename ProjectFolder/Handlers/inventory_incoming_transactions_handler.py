@@ -113,10 +113,7 @@ def update_transactions(transaction_id):
                 transaction[1] == part_id and
                 transaction[2] == supplier_id and
                 transaction[3] == rack_id and
-                transaction[4] == warehouse_id and
-                transaction[5] == user_id and
-                transaction[6] == transaction_date and
-                transaction[7] == transaction_profit
+                transaction[4] == warehouse_id
         ):
             return jsonify(message=f'Transaction {transaction_id} updated successfully')
 
